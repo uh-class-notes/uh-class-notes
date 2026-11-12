@@ -7,7 +7,9 @@ import * as config from '../config/settings.development.json';
 const connectionString = process.env.DATABASE_URL;
 
 if (!connectionString) {
-  throw new Error('DATABASE_URL is not defined. Add it to your .env file before running the seed.');
+  throw new Error(
+    'DATABASE_URL is not defined. Add it to your .env file before running the seed.',
+  );
 }
 
 const adapter = new PrismaPg({ connectionString });
@@ -45,6 +47,13 @@ async function main() {
       },
     });
   }
+
+  const classData = config.classData.flat();
+  const seededClassData = await prisma.classData.createMany({
+    data: classData,
+    skipDuplicates: true,
+  });
+  console.log(`  Added ${seededClassData.count} class data records`);
 }
 
 main()
