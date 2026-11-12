@@ -12,6 +12,12 @@ const Home = async () => {
         <section>
           <p>Signed in as {session.user.email}.</p>
           <div className="d-flex flex-wrap gap-2">
+            <Link className="btn btn-primary" href="/classes">
+              View Classes
+            </Link>
+            <Link className="btn btn-outline-primary" href="/classes/add">
+              Add Class
+            </Link>
             <Link className="btn btn-primary" href="/list">
               View My Stuff
             </Link>

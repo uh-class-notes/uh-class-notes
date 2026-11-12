@@ -22,6 +22,8 @@ const NavBar: React.FC = () => {
           <Nav className="me-auto">
             {session && (
               <>
+                <Nav.Link href="/classes">My Classes</Nav.Link>
+                <Nav.Link href="/classes/add">Add Class</Nav.Link>
                 <Nav.Link href="/list">My Stuff</Nav.Link>
                 <Nav.Link href="/add">Add Stuff</Nav.Link>
                 {session.user.role === 'ADMIN' && (

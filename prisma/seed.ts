@@ -48,12 +48,20 @@ async function main() {
     });
   }
 
-  const classData = config.classData.flat();
-  const seededClassData = await prisma.classData.createMany({
-    data: classData,
+  const classOfferings = config.classData.map((classData) => ({
+    campcode: classData.campcode,
+    crn: classData.crn,
+    subjcode: classData.subjcode,
+    crsenumb: classData.crsenumb,
+    seqnumb: classData.seqnumb,
+    lastName: classData.LastName,
+    subjectName: classData.subject_name,
+  }));
+  const seededClassOfferings = await prisma.classOffering.createMany({
+    data: classOfferings,
     skipDuplicates: true,
   });
-  console.log(`  Added ${seededClassData.count} class data records`);
+  console.log(`  Added ${seededClassOfferings.count} class offering records`);
 }
 
 main()

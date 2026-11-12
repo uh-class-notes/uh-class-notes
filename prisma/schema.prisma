@@ -18,10 +18,12 @@ enum Role {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
-  role     Role   @default(USER)
+  id             Int          @id @default(autoincrement())
+  email          String       @unique
+  password       String
+  role           Role         @default(USER)
+  savedClasses   UserClass[]
+  savedOfferings SavedClass[]
 }
 
 enum Condition {
@@ -40,13 +42,48 @@ model Stuff {
 }
 
 model ClassData {
-  id               Int    @id @default(autoincrement())
+  id               Int         @id @default(autoincrement())
   stvsubjDesc      String
   ssbsectCampCode  String
   stvsubjCode      String
   stvtermDesc      String
   stvtermCode      String
   countStvtermCode Int
+  savedBy          UserClass[]
 
   @@unique([stvsubjCode, ssbsectCampCode, stvtermCode])
+}
+
+model UserClass {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  classDataId Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  classData   ClassData @relation(fields: [classDataId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, classDataId])
+}
+
+model ClassOffering {
+  id          Int          @id @default(autoincrement())
+  campcode    String
+  crn         String       @unique
+  subjcode    String
+  crsenumb    String
+  seqnumb     String
+  lastName    String?
+  subjectName String
+  savedBy     SavedClass[]
+
+  @@index([campcode, subjcode, crsenumb])
+}
+
+model SavedClass {
+  id              Int           @id @default(autoincrement())
+  userId          Int
+  classOfferingId Int
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  classOffering   ClassOffering @relation(fields: [classOfferingId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, classOfferingId])
 }
