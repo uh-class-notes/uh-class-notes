@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./globals.css";
+import './globals.css';
 import NavBar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import Providers from './providers';
 
 export const metadata: Metadata = {
-  title: "Project Name",
-  description: "Briefly describe this project.",
+  title: 'UH Class Notes',
+  description: 'Manage class resources and study materials.',
 };
 
 export default function RootLayout({
@@ -17,9 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="wrapper">
-       <Providers>
+        <Providers>
           <NavBar />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>
