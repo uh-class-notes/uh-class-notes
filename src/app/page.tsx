@@ -1,45 +1,46 @@
-import Link from 'next/link';
+
 import { auth } from '@/lib/auth';
+import { Col, Row, Button, Container } from 'react-bootstrap';
 
 const Home = async () => {
   const session = await auth();
 
   return (
-    <main className="container py-5">
-      <h1>UH Class Notes</h1>
-      <p>Manage class resources and study materials.</p>
+    <main className="py-4">
+      <Container fluid className="pb-5">
+        <Row className="mb-1">
+          <Col xs={3} />
+          <Col xs={9} className="text-left">
+            <h1>UH CLASS NOTES</h1>
+          </Col>
+        </Row>
+        <Row className="mb-2">
+          <Col xs={3} />
+          <Col xs={9} className="text-left">
+            <ul>
+              <li>Manage class resources and study materials.</li>
+            </ul>
+          </Col>
+        </Row>
+      </Container>
       {session?.user?.email ? (
-        <section>
-          <p>Signed in as {session.user.email}.</p>
-          <div className="d-flex flex-wrap gap-2">
-            <Link className="btn btn-primary" href="/classes">
-              View Classes
-            </Link>
-            <Link className="btn btn-outline-primary" href="/classes/add">
-              Add Class
-            </Link>
-            <Link className="btn btn-primary" href="/list">
-              View My Stuff
-            </Link>
-            <Link className="btn btn-outline-primary" href="/add">
-              Add Stuff
-            </Link>
-            {session.user.role === 'ADMIN' && (
-              <Link className="btn btn-outline-secondary" href="/admin">
-                Admin Dashboard
-              </Link>
-            )}
-          </div>
-        </section>
+        <Container id="user-buttons" className="text-center mt-2">
+          <Button href="/notes" variant="primary" className="me-4">
+            View all Notes
+          </Button>
+          <Button href="/create" variant="primary">
+            Create a Note
+          </Button>
+        </Container>
       ) : (
-        <div className="d-flex gap-2">
-          <Link className="btn btn-primary" href="/auth/signin">
+        <Container id="user-buttons" className="text-center mt-2">
+          <Button href="/auth/signin" variant="primary" className="me-4">
             Sign in
-          </Link>
-          <Link className="btn btn-outline-primary" href="/auth/signup">
+          </Button>
+          <Button href="/auth/signup" variant="primary">
             Sign up
-          </Link>
-        </div>
+          </Button>
+        </Container>
       )}
     </main>
   );

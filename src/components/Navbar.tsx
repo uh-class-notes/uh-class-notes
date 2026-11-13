@@ -1,6 +1,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react'; // v5 compatible
+import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import {
   BoxArrowRight,
@@ -11,10 +12,11 @@ import {
 
 const NavBar: React.FC = () => {
   const { data: session, status } = useSession();
+  const pathName = usePathname();
   if (status === 'loading') return null;
   const currentUser = session?.user?.email;
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" expand="lg">
       <Container>
         <Navbar.Brand href="/">UH Class Notes</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -22,10 +24,15 @@ const NavBar: React.FC = () => {
           <Nav className="me-auto">
             {session && (
               <>
-                <Nav.Link href="/classes">My Classes</Nav.Link>
-                <Nav.Link href="/classes/add">Add Class</Nav.Link>
-                <Nav.Link href="/list">My Stuff</Nav.Link>
-                <Nav.Link href="/add">Add Stuff</Nav.Link>
+                <Nav.Link id="view-notes-nav" href="/notes" active={pathName === '/notes'}>
+                  Notes
+                </Nav.Link>
+                <Nav.Link id="create-notes-nav" href="/create" active={pathName === '/create'}>
+                  Create
+                </Nav.Link>
+                <Nav.Link id="your-notes-nav" href="/yournote" active={pathName === '/yournote'}>
+                  Your Notes
+                </Nav.Link>
                 {session.user.role === 'ADMIN' && (
                   <Nav.Link href="/admin">Admin</Nav.Link>
                 )}
