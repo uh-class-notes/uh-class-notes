@@ -5,7 +5,7 @@ import NavBar from '@/components/Navbar';
 import Providers from './providers';
 
 export const metadata: Metadata = {
-  title: "Project Name",
+  title: "UH Class Notes",
   description: "Briefly describe this project.",
 };
 
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="wrapper">
-       <Providers>
+        <Providers>
           <NavBar />
           {children}
         </Providers>

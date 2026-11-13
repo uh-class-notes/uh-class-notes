@@ -1,14 +1,55 @@
+:root {
+  --nat-navbar-bg: rgb(16, 95, 32);
+  --nat-navbar-bg-color: rgb(16, 95, 32);
+  --nat-navbar-highlight-text: rgb(232, 232, 232);
+  --nat-navbar-text-highlight: var(--bs-gray-500);
+  --nat-navbar-highlight-bg: rgb(232, 232, 232);
+  --nat-navbar-bg-rgb: 16, 95, 32;
+  --nat-navbar-text-color: rgb(21, 21, 21);
+}
+
 html,
 body {
+  --bs-dark: var(--nat-navbar-bg);
+  --bs-dark-rgb: var(--nat-navbar-bg-rgb);
   --bs-light-rgb: 236, 236, 236;
   box-sizing: border-box;
   height: 100%;
+  width: 100%;
   padding: 0;
   margin: 0;
+  background: fixed center url("/notebook-background.png") no-repeat;
+  background-size: cover;
 }
+
+body .navbar {
+  --bs-navbar-active-color: var(--nat-navbar-highlight-text);
+  --bs-navbar-brand-color: var(--nat-navbar-text-color);
+  --bs-navbar-brand-hover-color: var(--nat-navbar-highlight-text);
+  --bs-navbar-color: var(--nat-navbar-text-color);
+  --bs-navbar-hover-color: var(--nat-navbar-highlight-text);
+}
+
 .wrapper {
   box-sizing: border-box;
   min-height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+ul li {
+  font-size: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+a {
+  color: var(--nat-navbar-text-color);
+}
+
+a:hover {
+  color: rgb(126, 126, 126);
 }
