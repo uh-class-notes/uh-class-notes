@@ -19,7 +19,7 @@ const ClassesPage = async () => {
 
   const classes = await prisma.savedClass.findMany({
     where: { userId: user.id },
-    include: { classOffering: true },
+    include: { classData: true },
     orderBy: { id: 'desc' },
   });
 
@@ -46,16 +46,16 @@ const ClassesPage = async () => {
               </tr>
             </thead>
             <tbody>
-              {classes.map(({ id, classOffering }) => (
+              {classes.map(({ id, classData }) => (
                 <tr key={id}>
-                  <td>{classOffering.campcode}</td>
+                  <td>{classData.campcode}</td>
                   <td>
-                    {classOffering.subjectName} ({classOffering.subjcode})
+                    {classData.subjectName} ({classData.subjcode})
                   </td>
-                  <td>{formatCourseNumber(classOffering.crsenumb)}</td>
-                  <td>{classOffering.crn}</td>
-                  <td>{classOffering.seqnumb}</td>
-                  <td>{classOffering.lastName ?? 'Not listed'}</td>
+                  <td>{formatCourseNumber(classData.crsenumb)}</td>
+                  <td>{classData.crn}</td>
+                  <td>{classData.seqnumb}</td>
+                  <td>{classData.lastName ?? 'Not listed'}</td>
                   <td>
                     <RemoveClassForm id={id} />
                   </td>

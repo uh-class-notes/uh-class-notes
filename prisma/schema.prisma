@@ -22,8 +22,8 @@ model User {
   email          String       @unique
   password       String
   role           Role         @default(USER)
-  savedClasses   UserClass[]
-  savedOfferings SavedClass[]
+  savedClasses   SavedClass[]
+  notes          NoteData[]
 }
 
 enum Condition {
@@ -42,29 +42,6 @@ model Stuff {
 }
 
 model ClassData {
-  id               Int         @id @default(autoincrement())
-  stvsubjDesc      String
-  ssbsectCampCode  String
-  stvsubjCode      String
-  stvtermDesc      String
-  stvtermCode      String
-  countStvtermCode Int
-  savedBy          UserClass[]
-
-  @@unique([stvsubjCode, ssbsectCampCode, stvtermCode])
-}
-
-model UserClass {
-  id          Int       @id @default(autoincrement())
-  userId      Int
-  classDataId Int
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  classData   ClassData @relation(fields: [classDataId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, classDataId])
-}
-
-model ClassOffering {
   id          Int          @id @default(autoincrement())
   campcode    String
   crn         String       @unique
@@ -81,9 +58,27 @@ model ClassOffering {
 model SavedClass {
   id              Int           @id @default(autoincrement())
   userId          Int
-  classOfferingId Int
+  classDataId     Int
   user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  classOffering   ClassOffering @relation(fields: [classOfferingId], references: [id], onDelete: Cascade)
+  classData       ClassData     @relation(fields: [classDataId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, classOfferingId])
+  @@unique([userId, classDataId])
+}
+
+model NoteData {
+  id          Int           @id @default(autoincrement())
+  title       String
+  userId      Int
+  semester    String
+  subjcode    String
+  crsenumb    String
+  section     String?
+  instructor  String?
+  imageData   Bytes?        @db.ByteA
+  imageUrl    String?
+  textContent String?
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([semester, subjcode, crsenumb])
 }

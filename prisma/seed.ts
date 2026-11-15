@@ -48,7 +48,7 @@ async function main() {
     });
   }
 
-  const classOfferings = config.classData.map((classData) => ({
+  const classData = config.classData.map((classData) => ({
     campcode: classData.campcode,
     crn: classData.crn,
     subjcode: classData.subjcode,
@@ -57,11 +57,11 @@ async function main() {
     lastName: classData.LastName,
     subjectName: classData.subject_name,
   }));
-  const seededClassOfferings = await prisma.classOffering.createMany({
-    data: classOfferings,
+  const seededClassData = await prisma.classData.createMany({
+    data: classData,
     skipDuplicates: true,
   });
-  console.log(`  Added ${seededClassOfferings.count} class offering records`);
+  console.log(`  Added ${seededClassData.count} class data records`);
 }
 
 main()
