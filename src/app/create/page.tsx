@@ -1,13 +1,12 @@
 'use client';
 
-import { Card, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import CreateNoteForm from '@/components/CreateNoteForm';
 
 const Create = () => (
   <Container className="container py-5">
     <h1>Create Note</h1>
-    <Card>
-      <Card.Body />
-    </Card>
+    <CreateNoteForm />
   </Container>
 );
 
