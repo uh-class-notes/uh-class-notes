@@ -27,20 +27,20 @@ async function findCurrentUserId(email: string) {
 
 export async function addClass(formData: FormData) {
   const currentUser = await loggedInProtectedPage();
-  const classOfferingId = readId(formData, 'classOfferingId');
-  const classOffering = await prisma.classOffering.findUnique({
-    where: { id: classOfferingId },
+  const classDataId = readId(formData, 'classDataId');
+  const classData = await prisma.classData.findUnique({
+    where: { id: classDataId },
   });
 
-  if (!classOffering) {
+  if (!classData) {
     throw new Error('The selected class is not in the catalog.');
   }
 
   const userId = await findCurrentUserId(currentUser.email);
   await prisma.savedClass.upsert({
-    where: { userId_classOfferingId: { userId, classOfferingId } },
+    where: { userId_classDataId: { userId, classDataId } },
     update: {},
-    create: { userId, classOfferingId },
+    create: { userId, classDataId },
   });
 
   revalidatePath('/classes');

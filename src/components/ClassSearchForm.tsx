@@ -150,7 +150,7 @@ const ClassSearchForm = ({
                     <td>
                       <form action={addClass}>
                         <input
-                          name="classOfferingId"
+                          name="classDataId"
                           type="hidden"
                           value={item.id}
                         />

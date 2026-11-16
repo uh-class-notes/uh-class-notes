@@ -16,7 +16,7 @@ const AddClassPage = async () => {
   }
 
   const [classOptions, savedClasses] = await Promise.all([
-    prisma.classOffering.findMany({
+    prisma.classData.findMany({
       select: {
         id: true,
         campcode: true,
@@ -31,7 +31,7 @@ const AddClassPage = async () => {
     }),
     prisma.savedClass.findMany({
       where: { userId: user.id },
-      select: { classOfferingId: true },
+      select: { classDataId: true },
     }),
   ]);
 
@@ -43,7 +43,7 @@ const AddClassPage = async () => {
         {classOptions.length > 0 ? (
           <ClassSearchForm
             classOptions={classOptions}
-            savedClassIds={savedClasses.map((item) => item.classOfferingId)}
+            savedClassIds={savedClasses.map((item) => item.classDataId)}
           />
         ) : (
           <p>The class catalog is empty. Run the database seed to load it.</p>
