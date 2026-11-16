@@ -1,11 +1,12 @@
 'use client';
 
-import { Button, Card, Col, Form, Row } from 'react-bootstrap';
+import { Button, Card, Col, Form, Row, Container } from 'react-bootstrap';
 import { PlusSquareFill } from 'react-bootstrap-icons';
 
 const CreateNoteForm = () => (
   <Card>
   	<Card.Body>
+			<Container>
 			<Row>
       	<Form.Group className="mb-3" controlId="noteTitle">
         	<Form.Label>Title</Form.Label>
@@ -20,6 +21,7 @@ const CreateNoteForm = () => (
       		</Form.Group>
 				</Col>
 				<Col>
+					<p>Semester</p>
 					<Form.Select className="mb-3" aria-label="Semester">
 						<option>Select semester</option>
 						<option value="1">Fall 2026</option>
@@ -35,25 +37,24 @@ const CreateNoteForm = () => (
       	</Form.Group>
 			</Row>
 			<Row>
+				<p>Insert Image</p>
 				<Button variant="primary" type="submit" className="p-5">
-					<PlusSquareFill /> 
-					Insert Image
+					<PlusSquareFill size={40}/> 
 				</Button>
 			</Row>
 			<Form.Group className="form-group">
         <Row className="pt-3 mt-2">
-          <Col className="justify-content-right">
-            <Button type="submit" variant="primary">
-              Submit
-            </Button>
-          </Col>
-					<Col className="justify-content-left">
-            <Button type="submit" variant="primary">
-              Cancel
-            </Button>
-          </Col>
+					<Col className="d-flex justify-content-end">
+          	<Button type="submit" variant="primary" className="me-3">
+            	Cancel
+          	</Button>
+          	<Button type="submit" variant="primary">
+           		Submit
+          	</Button>
+					</Col>
 				</Row>
 			</Form.Group>
+			</Container>
 		</Card.Body>
 	</Card>    
 );
