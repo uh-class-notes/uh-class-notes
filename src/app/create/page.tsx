@@ -8,8 +8,11 @@ const Create = async () => {
   const offerings = await prisma.offering.findMany({
     include: {
       course: true,
+      term: true,
     },
     orderBy: [
+      { term: { year: 'asc' } },
+      { term: { semester: 'asc' } },
       { course: { subjcode: 'asc' } },
       { course: { crsenumb: 'asc' } },
       { seqnumb: 'asc' },
@@ -21,6 +24,10 @@ const Create = async () => {
     seqnumb: offering.seqnumb,
     lastName: offering.lastName,
     subjectName: offering.course.subjectName,
+    courseName: offering.course.name,
+    termCode: offering.term.code,
+    year: offering.term.year,
+    semesterCode: offering.term.semester,
   }));
 
   return (
