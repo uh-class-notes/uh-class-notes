@@ -5,16 +5,23 @@ import { prisma } from '@/lib/prisma';
 
 const Create = async () => {
   await loggedInProtectedPage();
-  const classOptions = await prisma.classData.findMany({
-    select: {
-      subjcode: true,
-      crsenumb: true,
-      seqnumb: true,
-      lastName: true,
-      subjectName: true,
+  const offerings = await prisma.offering.findMany({
+    include: {
+      course: true,
     },
-    orderBy: [{ subjcode: 'asc' }, { crsenumb: 'asc' }, { seqnumb: 'asc' }],
+    orderBy: [
+      { course: { subjcode: 'asc' } },
+      { course: { crsenumb: 'asc' } },
+      { seqnumb: 'asc' },
+    ],
   });
+  const classOptions = offerings.map((offering) => ({
+    subjcode: offering.course.subjcode,
+    crsenumb: offering.course.crsenumb,
+    seqnumb: offering.seqnumb,
+    lastName: offering.lastName,
+    subjectName: offering.course.subjectName,
+  }));
 
   return (
     <Container className="container py-5">
