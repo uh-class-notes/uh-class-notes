@@ -16,24 +16,31 @@ const AddClassPage = async () => {
   }
 
   const [classOptions, savedClasses] = await Promise.all([
-    prisma.classData.findMany({
-      select: {
-        id: true,
-        campcode: true,
-        crn: true,
-        subjcode: true,
-        crsenumb: true,
-        seqnumb: true,
-        lastName: true,
-        subjectName: true,
+    prisma.offering.findMany({
+      include: {
+        course: true,
       },
-      orderBy: [{ campcode: 'asc' }, { subjcode: 'asc' }, { crsenumb: 'asc' }],
+      orderBy: [
+        { campcode: 'asc' },
+        { course: { subjcode: 'asc' } },
+        { course: { crsenumb: 'asc' } },
+      ],
     }),
     prisma.savedClass.findMany({
       where: { userId: user.id },
-      select: { classDataId: true },
+      select: { offeringId: true },
     }),
   ]);
+  const flatClassOptions = classOptions.map((offering) => ({
+    id: offering.id,
+    campcode: offering.campcode,
+    crn: offering.crn,
+    subjcode: offering.course.subjcode,
+    crsenumb: offering.course.crsenumb,
+    seqnumb: offering.seqnumb,
+    lastName: offering.lastName,
+    subjectName: offering.course.subjectName,
+  }));
 
   return (
     <main>
@@ -42,8 +49,8 @@ const AddClassPage = async () => {
         <p>Choose a campus, then narrow the catalog by term and subject.</p>
         {classOptions.length > 0 ? (
           <ClassSearchForm
-            classOptions={classOptions}
-            savedClassIds={savedClasses.map((item) => item.classDataId)}
+            classOptions={flatClassOptions}
+            savedClassIds={savedClasses.map((item) => item.offeringId)}
           />
         ) : (
           <p>The class catalog is empty. Run the database seed to load it.</p>

@@ -48,20 +48,84 @@ async function main() {
     });
   }
 
-  const classData = config.classData.map((classData) => ({
-    campcode: classData.campcode,
-    crn: classData.crn,
-    subjcode: classData.subjcode,
-    crsenumb: classData.crsenumb,
-    seqnumb: classData.seqnumb,
-    lastName: classData.LastName,
-    subjectName: classData.subject_name,
-  }));
-  const seededClassData = await prisma.classData.createMany({
-    data: classData,
+  const termData = new Map(
+    config.classData.map((data) => [
+      data.term_code,
+      {
+        code: data.term_code,
+        year: Number(data.year),
+        semester: data.semester,
+      },
+    ]),
+  );
+
+  for (const term of termData.values()) {
+    await prisma.term.upsert({
+      where: { code: term.code },
+      update: {
+        year: term.year,
+        semester: term.semester,
+      },
+      create: term,
+    });
+  }
+
+  const courseData = new Map(
+    config.classData.map((data) => [
+      `${data.subjcode}:${data.crsenumb}`,
+      {
+        subjcode: data.subjcode,
+        crsenumb: data.crsenumb,
+        name: data.class_name,
+        subjectName: data.subject_name,
+      },
+    ]),
+  );
+
+  for (const course of courseData.values()) {
+    await prisma.course.upsert({
+      where: {
+        subjcode_crsenumb: {
+          subjcode: course.subjcode,
+          crsenumb: course.crsenumb,
+        },
+      },
+      update: {
+        name: course.name,
+        subjectName: course.subjectName,
+      },
+      create: course,
+    });
+  }
+
+  const offeringData = await Promise.all(
+    config.classData.map(async (data) => {
+      const [term, course] = await Promise.all([
+        prisma.term.findUniqueOrThrow({ where: { code: data.term_code } }),
+        prisma.course.findUniqueOrThrow({
+          where: {
+            subjcode_crsenumb: {
+              subjcode: data.subjcode,
+              crsenumb: data.crsenumb,
+            },
+          },
+        }),
+      ]);
+      return {
+        termId: term.id,
+        courseId: course.id,
+        campcode: data.campcode,
+        crn: data.crn,
+        seqnumb: data.seqnumb,
+        lastName: data.LastName || null,
+      };
+    }),
+  );
+  const seededOfferings = await prisma.offering.createMany({
+    data: offeringData,
     skipDuplicates: true,
   });
-  console.log(`  Added ${seededClassData.count} class data records`);
+  console.log(`  Added ${seededOfferings.count} offering records`);
 }
 
 main()
