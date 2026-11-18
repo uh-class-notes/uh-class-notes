@@ -41,28 +41,50 @@ model Stuff {
   owner     String
 }
 
-model ClassData {
-  id          Int          @id @default(autoincrement())
+model Offering {
+  id          Int        @id @default(autoincrement())
+  termId      Int
+  courseId    Int
   campcode    String
-  crn         String       @unique
-  subjcode    String
-  crsenumb    String
+  crn         String
   seqnumb     String
   lastName    String?
-  subjectName String
+  term        Term       @relation(fields: [termId], references: [id], onDelete: Cascade)
+  course      Course     @relation(fields: [courseId], references: [id], onDelete: Cascade)
   savedBy     SavedClass[]
 
-  @@index([campcode, subjcode, crsenumb])
+  @@unique([termId, campcode, crn])
+  @@index([termId, courseId])
+}
+
+model Term {
+  id          Int         @id @default(autoincrement())
+  code        String      @unique
+  year        Int
+  semester    String
+  offerings   Offering[]
+}
+
+model Course {
+  id          Int         @id @default(autoincrement())
+  subjcode    String
+  crsenumb    String
+  name        String
+  subjectName String
+  offerings   Offering[]
+
+  @@unique([subjcode, crsenumb])
+  @@index([subjcode, crsenumb])
 }
 
 model SavedClass {
-  id              Int           @id @default(autoincrement())
-  userId          Int
-  classDataId     Int
-  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  classData       ClassData     @relation(fields: [classDataId], references: [id], onDelete: Cascade)
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  offeringId  Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  offering    Offering @relation(fields: [offeringId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, classDataId])
+  @@unique([userId, offeringId])
 }
 
 model NoteData {

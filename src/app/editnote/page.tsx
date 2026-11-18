@@ -1,11 +1,11 @@
 'use client';
 
 import { Container } from 'react-bootstrap';
-import EditNoteForm from '@/components/CreateNoteForm';
+import EditNoteForm from '@/components/EditNoteForm';
 
 const Edit = () => (
   <Container className="container py-5">
-    <h1>Edit Note</h1>
+    <h1 className="text-center">Edit Note</h1>
     <EditNoteForm />
   </Container>
 );
