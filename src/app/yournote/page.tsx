@@ -40,7 +40,6 @@ const NotesPage = () => (
 
       <Row className="px-0 g-0">
 
-        {/* Left sidebar */}
         <Col xs={2}>
           <input
             type="text"
@@ -71,7 +70,6 @@ const NotesPage = () => (
           </label>
         </Col>
 
-        {/* Right side: note cards */}
         <Col xs={10} className="px-4">
           <Row xs={1} md={2} lg={3} className="g-4">
             {notes.map((note) => (
