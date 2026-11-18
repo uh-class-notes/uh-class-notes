@@ -282,21 +282,12 @@ const CreateNoteForm = ({ classOptions }: CreateNoteFormProps) => {
             <Form.Control name="textContent" as="textarea" rows={8} />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="noteImageUrl">
-            <Form.Label>Image URL</Form.Label>
-            <Form.Control
-              name="imageUrl"
-              type="url"
-              placeholder="https://..."
-            />
-          </Form.Group>
-
           <Form.Group className="mb-3" controlId="noteImage">
             <Form.Label>Upload Image</Form.Label>
             <Form.Control name="image" type="file" accept="image/*" />
           </Form.Group>
 
-          <div className="d-flex gap-2">
+          <div className="d-flex gap-2 justify-content-end">
             <Button type="submit" variant="primary">
               <PlusSquareFill className="me-2" />
               Submit

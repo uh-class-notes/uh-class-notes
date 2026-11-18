@@ -1,19 +1,17 @@
 import { Col, Container, Row } from 'react-bootstrap';
 
 const NotesPage = () => (
-  <main className="py-3">
+  <main className="py-4">
     <Container fluid>
-      <Row className="mb-5">
-        <Col xs={2} />
-        <Col xs={10} className="text-center">
-          <h1>NOTES</h1>
-        </Col>
+      <Row className="mb-5 mt-4">
+        <h1 className="text-center">NOTES</h1>
       </Row>
       <Row className="px-0 g-0">
         <Col xs={2}>
+          <p className="form-label">Search for a class</p>
           <input
             type="text"
-            placeholder="Search classes..."
+            placeholder="Class name..."
             className="form-control mb-4"
           />
           <h4 className="pt-2">Sort By:</h4>
