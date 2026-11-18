@@ -16,7 +16,7 @@ const CreateNoteForm = () => (
 			<Row>
 				<Col>
 					<Form.Group className="mb-3" controlId="noteClass">
-        		<Form.Label>Class</Form.Label>
+        		<p>Class</p>
         		<Form.Control type="text" placeholder="Enter class" />
       		</Form.Group>
 				</Col>
@@ -38,17 +38,17 @@ const CreateNoteForm = () => (
 			</Row>
 			<Row>
 				<p>Insert Image</p>
-				<Button variant="primary" type="submit" className="p-5">
+				<Button variant="outline-secondary" type="submit" className="p-5">
 					<PlusSquareFill size={40}/> 
 				</Button>
 			</Row>
 			<Form.Group className="form-group">
         <Row className="pt-3 mt-2">
 					<Col className="d-flex justify-content-end">
-          	<Button type="submit" variant="primary" className="me-3">
+          	<Button type="submit" variant="outline-secondary" className="me-3">
             	Cancel
           	</Button>
-          	<Button type="submit" variant="primary">
+          	<Button type="submit" variant="outline-secondary">
            		Submit
           	</Button>
 					</Col>
