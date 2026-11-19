@@ -4,7 +4,7 @@ const YourNotesPage = () => (
   <main className="py-4">
     <Container fluid>
       <Row className="mb-5 mt-4">
-          <h1 className="text-center">YOUR NOTES</h1>
+        <h1 className="text-center">YOUR NOTES</h1>
       </Row>
       <Row className="px-0 g-0">
         <Col xs={2}>
