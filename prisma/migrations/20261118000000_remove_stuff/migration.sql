@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS "Stuff";
+
+DROP TYPE IF EXISTS "Condition";
