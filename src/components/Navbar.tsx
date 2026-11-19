@@ -34,7 +34,9 @@ const NavBar: React.FC = () => {
                   Your Notes
                 </Nav.Link>
                 {session.user.role === 'ADMIN' && (
-                  <Nav.Link href="/admin">Admin</Nav.Link>
+                  <Nav.Link id="admin-nav" href="/admin" active={pathName === '/admin'}>
+                    Admin
+                  </Nav.Link>
                 )}
               </>
             )}
