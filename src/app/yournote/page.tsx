@@ -1,4 +1,16 @@
 import { Col, Container, Row } from 'react-bootstrap';
+import NoteCard from '@/components/NoteCard';
+
+export const notes = [
+  {
+    id: 1,
+    title: 'notes thumbnail',
+    description: 'notes notes thumbnail',
+    author: 'John Smith',
+    course: 'ICS 314',
+    semester: 'Fall 2026',
+  },
+];
 
 const YourNotesPage = () => (
   <main className="py-4">
@@ -28,7 +40,25 @@ const YourNotesPage = () => (
           <input type="checkbox" className="form-check-input mb-4" />
           <label className="form-check-label">Bookmarked</label>
         </Col>
-        <Col xs={10} className="text-left" />
+         {/* Right side: note cards */}
+        <Col xs={10} className="px-4">
+          <Row xs={1} md={2} lg={3} className="g-4">
+            {notes.map((note) => (
+              <Col key={note.id}>
+                <NoteCard
+                  id={note.id}
+                  title={note.title}
+                  description={note.description}
+                  author={note.author}
+                  course={note.course}
+                  semester={note.semester}
+                  showActions={true}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Col>
+
       </Row>
     </Container>
   </main>

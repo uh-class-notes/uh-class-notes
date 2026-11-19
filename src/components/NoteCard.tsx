@@ -50,7 +50,7 @@ const NoteCard = ({
           className="d-flex flex-column text-end position-relative"
           style={{ zIndex: 2 }}
         >
-          <Link href={`/edit-note/${id}`}>Edit</Link>
+          <Link href={`editnote`}>Edit</Link>
           <Link href={`/delete-note/${id}`}>Delete</Link>
         </div>
     )}
