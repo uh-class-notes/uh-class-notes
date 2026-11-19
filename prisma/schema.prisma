@@ -18,55 +18,40 @@ enum Role {
 }
 
 model User {
-  id             Int          @id @default(autoincrement())
-  email          String       @unique
-  password       String
-  role           Role         @default(USER)
-  savedClasses   SavedClass[]
-  notes          NoteData[]
-}
-
-enum Condition {
-  excellent
-  good
-  fair
-  poor
-}
-
-model Stuff {
-  id        Int       @id @default(autoincrement())
-  name      String
-  quantity  Int
-  condition Condition @default(good)
-  owner     String
+  id           Int          @id @default(autoincrement())
+  email        String       @unique
+  password     String
+  role         Role         @default(USER)
+  savedClasses SavedClass[]
+  notes        NoteData[]
 }
 
 model Offering {
-  id          Int        @id @default(autoincrement())
-  termId      Int
-  courseId    Int
-  campcode    String
-  crn         String
-  seqnumb     String
-  lastName    String?
-  term        Term       @relation(fields: [termId], references: [id], onDelete: Cascade)
-  course      Course     @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  savedBy     SavedClass[]
+  id       Int          @id @default(autoincrement())
+  termId   Int
+  courseId Int
+  campcode String
+  crn      String
+  seqnumb  String
+  lastName String?
+  term     Term         @relation(fields: [termId], references: [id], onDelete: Cascade)
+  course   Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  savedBy  SavedClass[]
 
   @@unique([termId, campcode, crn])
   @@index([termId, courseId])
 }
 
 model Term {
-  id          Int         @id @default(autoincrement())
-  code        String      @unique
-  year        Int
-  semester    String
-  offerings   Offering[]
+  id        Int        @id @default(autoincrement())
+  code      String     @unique
+  year      Int
+  semester  String
+  offerings Offering[]
 }
 
 model Course {
-  id          Int         @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   subjcode    String
   crsenumb    String
   name        String
@@ -78,17 +63,17 @@ model Course {
 }
 
 model SavedClass {
-  id          Int      @id @default(autoincrement())
-  userId      Int
-  offeringId  Int
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  offering    Offering @relation(fields: [offeringId], references: [id], onDelete: Cascade)
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  offeringId Int
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  offering   Offering @relation(fields: [offeringId], references: [id], onDelete: Cascade)
 
   @@unique([userId, offeringId])
 }
 
 model NoteData {
-  id          Int           @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   title       String
   userId      Int
   semester    String
@@ -96,10 +81,10 @@ model NoteData {
   crsenumb    String
   section     String?
   instructor  String?
-  imageData   Bytes?        @db.ByteA
+  imageData   Bytes?  @db.ByteA
   imageUrl    String?
   textContent String?
-  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([semester, subjcode, crsenumb])

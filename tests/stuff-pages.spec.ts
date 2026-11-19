@@ -1,10 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 for (const path of [
-  '/list',
-  '/add',
   '/admin',
-  '/edit/1',
   '/classes',
   '/classes/add',
 ]) {
