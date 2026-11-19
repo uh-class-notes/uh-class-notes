@@ -1,7 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import NoteCard from '@/components/NoteCard';
 
-const notes = [
+ export const notes = [
   {
     id: 1,
     title: 'notes thumbnail',
