@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 :root {
-  --nat-navbar-bg: rgb(16, 95, 32);
-  --nat-navbar-bg-color: rgb(16, 95, 32);
+  --nat-navbar-bg: rgb(19, 114, 38);
+  --nat-navbar-bg-color: rgb(19, 114, 38);
   --nat-navbar-highlight-text: rgb(232, 232, 232);
   --nat-navbar-text-highlight: var(--bs-gray-500);
   --nat-navbar-highlight-bg: rgb(232, 232, 232);
-  --nat-navbar-bg-rgb: 16, 95, 32;
+  --nat-navbar-bg-rgb: 19, 114, 38;
   --nat-navbar-text-color: rgb(21, 21, 21);
 }
 
