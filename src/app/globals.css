@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
 :root {
-  --nat-navbar-bg: rgb(16, 95, 32);
-  --nat-navbar-bg-color: rgb(16, 95, 32);
+  --nat-navbar-bg: rgb(19, 114, 38);
+  --nat-navbar-bg-color: rgb(19, 114, 38);
   --nat-navbar-highlight-text: rgb(232, 232, 232);
   --nat-navbar-text-highlight: var(--bs-gray-500);
   --nat-navbar-highlight-bg: rgb(232, 232, 232);
-  --nat-navbar-bg-rgb: 16, 95, 32;
+  --nat-navbar-bg-rgb: 19, 114, 38;
   --nat-navbar-text-color: rgb(21, 21, 21);
 }
 
@@ -18,6 +20,7 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
   background: fixed center url('/notebook-background.png') no-repeat;
   background-size: cover;
 }
@@ -38,7 +41,19 @@ body .navbar {
 }
 
 h1 {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
   font-size: 4rem;
+}
+
+h3 {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: normal;
+  font-size: 3rem;
 }
 
 ul li {
@@ -52,4 +67,8 @@ a {
 
 a:hover {
   color: rgb(111, 111, 111);
+}
+
+#section2 {
+  background-color: rgb(224, 224, 224);
 }
