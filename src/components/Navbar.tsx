@@ -27,14 +27,19 @@ const NavBar: React.FC = () => {
                 <Nav.Link id="view-notes-nav" href="/notes" active={pathName === '/notes'}>
                   Notes
                 </Nav.Link>
-                <Nav.Link id="create-notes-nav" href="/create" active={pathName === '/create'}>
-                  Create
-                </Nav.Link>
                 <Nav.Link id="your-notes-nav" href="/yournote" active={pathName === '/yournote'}>
                   Your Notes
                 </Nav.Link>
+                <Nav.Link id="your-notes-nav" href="/groups" active={pathName === '/groups'}>
+                  Groups
+                </Nav.Link>
+                <Nav.Link id="create-notes-nav" href="/create" active={pathName === '/create'}>
+                  Create
+                </Nav.Link>
                 {session.user.role === 'ADMIN' && (
-                  <Nav.Link href="/admin">Admin</Nav.Link>
+                  <Nav.Link id="admin-nav" href="/admin" active={pathName === '/admin'}>
+                    Admin
+                  </Nav.Link>
                 )}
               </>
             )}
