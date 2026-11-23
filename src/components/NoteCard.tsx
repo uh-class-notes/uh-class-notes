@@ -1,6 +1,7 @@
 'use client';
 
 import { Card } from 'react-bootstrap';
+import { PencilSquare, Trash3 } from 'react-bootstrap-icons';
 import Link from 'next/link';
 
 type NoteCardProps = {
@@ -50,8 +51,8 @@ const NoteCard = ({
           className="d-flex flex-column text-end position-relative"
           style={{ zIndex: 2 }}
         >
-          <Link href={`editnote`}>Edit</Link>
-          <Link href={`/delete-note/${id}`}>Delete</Link>
+          <Link href={`editnote`}><PencilSquare/></Link>
+          <Link href={`/delete-note/${id}`}><Trash3/></Link>
         </div>
     )}
       </div>

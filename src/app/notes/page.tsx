@@ -1,4 +1,4 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Image } from 'react-bootstrap';
 import NoteCard from '@/components/NoteCard';
 
  export const notes = [
@@ -31,21 +31,25 @@ import NoteCard from '@/components/NoteCard';
 const NotesPage = () => (
   <main className="py-4">
     <Container fluid>
-      <Row className="mb-5 mt-4">
-        <h1 className="text-center">NOTES</h1>
+      <Row className="pt-4" id="blockbackground">
+        <Col className="mx-3">
+          <h1>NOTES</h1>
+          <p>All notes that are public can be searched for here</p>
+        </Col>
+      </Row>
+      <Row className="p-3 mb-5" style={{backgroundColor: 'rgb(224, 224, 224)'}}>
+        <p className="form-label">Search for a class</p>
+          <input
+            type="text"
+            placeholder="Class name..."
+            className="form-control mb-4"
+          />
       </Row>
 
       <Row className="px-0 g-0">
 
         {/* Left sidebar */}
         <Col xs={2}>
-          <p className="form-label">Search for a class</p>
-          <input
-            type="text"
-            placeholder="Class name..."
-            className="form-control mb-4"
-          />
-
           <h4 className="pt-2">Sort By:</h4>
 
           <select className="form-control mb-4">

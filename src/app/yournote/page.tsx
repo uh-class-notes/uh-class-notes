@@ -15,17 +15,23 @@ export const notes = [
 const YourNotesPage = () => (
   <main className="py-4">
     <Container fluid>
-      <Row className="mb-5 mt-4">
-        <h1 className="text-center">YOUR NOTES</h1>
+      <Row className="pt-4" id="blockbackground">
+        <Col className="mx-3">
+          <h1>YOUR NOTES</h1>
+          <p>View all the notes you posted here.
+          </p>
+        </Col>
       </Row>
-      <Row className="px-0 g-0">
-        <Col xs={2}>
-          <p className="form-label">Search for a class</p>
+      <Row className="p-3 mb-5" style={{backgroundColor: 'rgb(224, 224, 224)'}}>
+        <p className="form-label">Search for a class</p>
           <input
             type="text"
             placeholder="Class name..."
             className="form-control mb-4"
           />
+      </Row>
+      <Row className="px-0 g-0">
+        <Col xs={2}>
           <h4 className="pt-2">Sort By:</h4>
           <select className="form-control mb-4">
             <option>Fall 2026</option>

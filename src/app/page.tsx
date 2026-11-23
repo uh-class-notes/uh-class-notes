@@ -20,7 +20,7 @@ const Home = async () => {
       </Container>
       {session?.user?.email ? (
         <div id="section2">
-          <Row className="mb-4 h-50">
+          <Row className="mb-4">
             <Col xs={6}>
                 <h3 className="text-center mt-5">Start Studying:</h3>
               <Container className="w-50 mt-4">

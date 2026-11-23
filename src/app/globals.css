@@ -72,3 +72,11 @@ a:hover {
 #section2 {
   background-color: rgb(224, 224, 224);
 }
+
+#blockbackground {
+  background-color: rgb(224, 224, 224);
+  background-image: 
+    linear-gradient(to right, rgba(224, 224, 224, 1), rgba(0, 0, 0, 0.1)),
+    url('/note-taking.webp');
+  background-size: cover;
+}
